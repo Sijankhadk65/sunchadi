@@ -1,19 +1,29 @@
-import React, { Component } from "react";
+import React from "react";
 
-class SideBar extends Component {
-  static Header = ({ children }) => (
-    <div className="sidebar__header">{children}</div>
-  );
-  static Content = ({ children }) => (
-    <div className="sidebar__content">{children}</div>
-  );
-  static Footer = ({ children }) => (
-    <div className="sidebar__footer">{children}</div>
-  );
-  render() {
-    const { children } = this.props;
-    return <div className="sidebar">{children}</div>;
-  }
-}
+import "./SideBar.css";
+
+const SideBar = ({ children, style }) => (
+  <div className="sidebar" style={style}>
+    {children}
+  </div>
+);
+
+SideBar.Header = ({ children, style }) => (
+  <div className="sidebar__header" style={style}>
+    {children}
+  </div>
+);
+
+SideBar.Content = ({ children, style }) => (
+  <div className="sidebar__content" style={style}>
+    {children}
+  </div>
+);
+
+SideBar.Footer = ({ children, style }) => (
+  <div className="sidebar__footer" style={style}>
+    {children}
+  </div>
+);
 
 export default SideBar;
