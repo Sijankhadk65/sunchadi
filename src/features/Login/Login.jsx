@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const login = () => (
   <div className="login" style={{ textAlign: "center", fontSize: "4rem" }}>
-    <Link to="/customers">Go</Link>
+    <Link to="/customers/view">Go</Link>
   </div>
 );
 

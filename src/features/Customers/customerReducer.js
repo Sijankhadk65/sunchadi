@@ -6,10 +6,12 @@ const initState = {
   searchedCustomers: []
 };
 
-const fetchCustomers = (state = initState, { customers }) => ({
-  ...state,
-  customers
-});
+const fetchCustomers = (state = initState, { customers }) => {
+  return {
+    ...state,
+    customers
+  };
+};
 
 const searchCustomer = (state = initState, { newCustomers }) => ({
   ...state,

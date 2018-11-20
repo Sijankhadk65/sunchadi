@@ -8,3 +8,8 @@
   border: 2px solid rgb(71, 71, 71);
   border-radius: 4px;
 }
+
+.input::placeholder {
+  color: #ccc;
+  font-weight: 300;
+}

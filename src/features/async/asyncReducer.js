@@ -10,24 +10,24 @@ const initState = {
   error: false
 };
 
-const asyncActionsStart = (state = initState) => ({
+const asyncActionStart = (state = initState) => ({
   ...state,
   loading: true
 });
 
-const asyncActionsEnd = (state = initState) => ({
+const asyncActionEnd = (state = initState) => ({
   ...state,
   loading: false
 });
 
-const asyncActionsError = (state = initState) => ({
+const asyncActionError = (state = initState) => ({
   ...state,
   loading: false,
   error: true
 });
 
 export default createReducer(initState, {
-  [ASYNC_ACTION_START]: asyncActionsStart,
-  [ASYNC_ACTION_END]: asyncActionsEnd,
-  [ASYNC_ACTION_ERROR]: asyncActionsError
+  [ASYNC_ACTION_START]: asyncActionStart,
+  [ASYNC_ACTION_END]: asyncActionEnd,
+  [ASYNC_ACTION_ERROR]: asyncActionError
 });
