@@ -24,6 +24,7 @@ class Customer extends Component {
     }, this.props.history);
   };
   render() {
+    console.log('times')
     const { initialValues, deleteCustomer, handleSubmit, loading } = this.props;
     if (loading) {
       return <Loader message="Processing Action..." />;
@@ -125,7 +126,7 @@ const mapState = (state, props) => {
   console.log(id)
   let customer = null;
   if (customers.length > 0) {
-    customer = customers.find(customer => (customer.id === id));
+    customer = customers.find(c => (c.id === id));
   }
   console.log(customer)
   return {
