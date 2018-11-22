@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { FaUser, FaEye, FaPlus, FaWrench } from "react-icons/fa";
+import {
+  FaUser,
+  FaEye,
+  FaPlus,
+  FaWrench,
+  FaMoneyCheckAlt,
+  FaDollarSign,
+  FaClock,
+  FaCogs,
+  FaAppStoreIos,
+  FaGreaterThanEqual
+} from "react-icons/fa";
 
 import Sidebar from "../../app/components/SideBar/SideBar";
 import Collapse from "../../app/components/Collapse/Collapse";
@@ -11,12 +22,31 @@ import "./SideBar.css";
 class SideBar extends Component {
   render() {
     const { sidebar, h3, collapseContent } = styles;
-    return (
-      <Sidebar style={sidebar}>
+    return <Sidebar style={sidebar}>
         <Sidebar.Header>
           <H3 style={h3}>Rohan</H3>
         </Sidebar.Header>
-        <Sidebar.Content>
+      <Sidebar.Content>
+        <Collapse>
+          <Collapse.Trigger>
+            <div className="TriggerItem">
+              <FaDollarSign /> &nbsp;&nbsp; Sell Item
+              </div>
+          </Collapse.Trigger>
+          <Collapse.Content style={collapseContent}>
+            <NavLink to="/sellings/sell">
+              <div className="subItem">
+                <FaMoneyCheckAlt /> &nbsp;&nbsp; Sell
+                </div>
+            </NavLink>
+
+            <NavLink to="/selllings/view">
+              <div className="subItem">
+                <FaClock /> &nbsp;&nbsp; <span style={{ fontSize: '1.8rem' }}>Selling History</span>
+              </div>
+            </NavLink>
+          </Collapse.Content>
+        </Collapse>
           <Collapse>
             <Collapse.Trigger>
               <div className="TriggerItem">
@@ -58,10 +88,31 @@ class SideBar extends Component {
                 </div>
               </NavLink>
             </Collapse.Content>
-          </Collapse>
+        </Collapse>
+        <Collapse>
+          <Collapse.Trigger>
+            <div className="TriggerItem">
+              <FaCogs /> &nbsp;&nbsp; Settings
+              </div>
+          </Collapse.Trigger>
+          <Collapse.Content style={collapseContent}>
+            <NavLink to="/settings/rate">
+              <div className="subItem">
+                <FaGreaterThanEqual /> &nbsp;&nbsp; Rate Settings
+                </div>
+            </NavLink>
+
+            <NavLink to="/settings/app">
+              <div className="subItem">
+                &nbsp;
+                  <FaAppStoreIos /> &nbsp;&nbsp; App Settings
+                </div>
+            </NavLink>
+          </Collapse.Content>
+        </Collapse>
+          
         </Sidebar.Content>
-      </Sidebar>
-    );
+      </Sidebar>;
   }
 }
 
