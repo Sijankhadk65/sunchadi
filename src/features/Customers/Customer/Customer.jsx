@@ -24,7 +24,6 @@ class Customer extends Component {
     }, this.props.history);
   };
   render() {
-    console.log('times')
     const { initialValues, deleteCustomer, handleSubmit, loading } = this.props;
     if (loading) {
       return <Loader message="Processing Action..." />;
@@ -55,7 +54,7 @@ class Customer extends Component {
           </Grid.Row>
         </Grid>
         <H1>Purchase Records</H1>
-        {this.props.initialValues && this.props.initialValues.history.map(
+        {this.props.initialValues.history && this.props.initialValues.history.map(
             h => (
               <Collapse>
                 <Collapse.Trigger>
@@ -130,7 +129,7 @@ const mapState = (state, props) => {
   }
   console.log(customer)
   return {
-    initialValues: customer,
+    initialValues: customer === undefined ? {} : customer,
     loading
   };
 };
