@@ -8,7 +8,7 @@ import Grid from "../../../../app/components/Grid/Grid";
 import TextInput from "../../../../app/components/Form/TextInput/TextInput";
 import FileInput from "../../../../app/components/Form/FileInput/FileInput";
 
-export default ({ handleSubmit, handleImageChange, handleCustomerAdd }) => (
+export default ({ handleSubmit, handleImageChange, handleWorkerAdd }) => (
   <Div>
     <Grid gutterWidth="4rem">
       <Grid.Row columns={2}>
@@ -17,34 +17,40 @@ export default ({ handleSubmit, handleImageChange, handleCustomerAdd }) => (
             <Field
               name="name"
               type="text"
-              label="Customer Name"
+              label="Worker Name"
               component={TextInput}
             />
             <Field
               name="address"
               type="text"
-              label="Customer Address"
+              label="Worker Address"
               component={TextInput}
             />
             <Field
               name="phone"
               type="number"
-              label="Customer Phone"
+              label="Worker Phone"
+              component={TextInput}
+            />
+            <Field
+              name="age"
+              type="number"
+              label="Worker Age"
               component={TextInput}
             />
           </form>
         </Grid.Column>
         <Grid.Column>
-          <FileInput label="Customer Image" onChange={handleImageChange} />
+          <FileInput label="Worker Image" onChange={handleImageChange} />
         </Grid.Column>
       </Grid.Row>
     </Grid>
     <Button
       type="submit"
       btnStyle="primary"
-      onClick={handleSubmit(handleCustomerAdd)}
+      onClick={handleSubmit(handleWorkerAdd)}
     >
-      Add Customer
+      Add Worker
     </Button>
   </Div>
 );
