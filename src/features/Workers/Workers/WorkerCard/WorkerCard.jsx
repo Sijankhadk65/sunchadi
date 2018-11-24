@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Card from "../../../../app/components/Card/Card";
 
 const Customer = ({ id, photoURI, name, address }) => (
-  <Link to={`/workers/view/${id}`}>
+  <Link to={`/worker/${id}`}>
     <Card>
       <Card.Thumbnail thumbnail={photoURI || '/customer.jpeg'}>{""}</Card.Thumbnail>
       <Card.Title>{name}</Card.Title>

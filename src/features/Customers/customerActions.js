@@ -5,7 +5,7 @@ import {
   asyncActionStart,
   asyncActionEnd,
   asyncActionError
-} from "../async/asyncActions";
+} from "../Async/asyncActions";
 
 import firestore, { firebase } from "../../app/config/firebaseConfig";
 
@@ -74,7 +74,7 @@ export const addCustomer = (image, customerInfo, history) => {
         ...customerInfo,
         history: []
       });
-      history.push("/customers/view");
+      history.push("/customers");
       dispatch(asyncActionEnd());
     } catch (error) {
       console.log(error);
@@ -91,7 +91,7 @@ export const deleteCustomer = (id, history) => {
         .collection("customers")
         .doc(id)
         .delete();
-      history.push("/customers/view");
+      history.push("/customers");
       dispatch(asyncActionEnd())
     } catch (error) {
       console.log(error);
@@ -113,7 +113,7 @@ export const updateCustomer = (customer, history) => {
           phone: customer.phone,
           history: customer.history
         });
-      history.push("/customers/view");
+      history.push("/customers");
       dispatch(asyncActionEnd())
     } catch (error) {
       console.log(error);

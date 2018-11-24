@@ -23,7 +23,7 @@ const asyncActionEnd = (state = initState) => ({
 const asyncActionError = (state = initState) => ({
   ...state,
   loading: false,
-  error: true
+  error: false
 });
 
 export default createReducer(initState, {

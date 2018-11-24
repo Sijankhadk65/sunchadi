@@ -7,15 +7,12 @@ import Input from "../../../app/components/Input/Input";
 
 import Customer from "./CustomerCard/CustomerCard";
 
-import { searchCustomer, fetchCustomers } from "../customerActions";
+import { searchCustomer } from "../customerActions";
 
 class Customers extends Component {
   state = {
     term: ""
   };
-  componentDidMount() {
-    this.props.fetchCustomers();
-  }
 
   render() {
     const { term } = this.state;
@@ -71,8 +68,7 @@ const mapState = ({
 });
 
 const actions = {
-  searchCustomer,
-  fetchCustomers
+  searchCustomer
 };
 
 export default connect(

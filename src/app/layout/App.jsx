@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Div from "../../app/common/Div/Div";
 import { appName } from "../config/appConfig";
@@ -19,10 +20,22 @@ import RegisterWorker from "../../features/Workers/RegisterWorker/RegisterWorker
 
 import Selling from "../../features/Sellings/Sellling/Selling";
 
-import RateSettings from '../../features/Settings/RateSettings/RateSettings'
-import AppSettings from '../../features/Settings/AppSettings/AppSettings'
+import RateSettings from "../../features/Settings/RateSettings/RateSettings";
+import AppSettings from "../../features/Settings/AppSettings/AppSettings";
+
+import Orders from "../../features/Order/Orders/Orders";
+import Order from "../../features/Order/Order/Order";
+
+import { fetchCustomers } from "../../features/Customers/customerActions";
+import { fetchWorkers } from "../../features/Workers/workerActions";
+import { fetchOrders } from "../../features/Order/orderActions";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchCustomers();
+    this.props.fetchWorkers();
+    this.props.fetchOrders();
+  }
   render() {
     return (
       <Div>
@@ -51,18 +64,27 @@ class App extends Component {
                   </Grid.Column>
                   <Grid.Column span={3} style={{ padding: "0 4rem" }}>
                     <Switch>
-                      <Route path="/customers/view/:id" component={Customer} />
-                      <Route path="/customers/view" component={Customers} />
+                      <Route path="/customers" component={Customers} />
                       <Route
-                        path="/customers/register"
+                        path="/customer/register"
                         component={RegisterCustomer}
                       />
-                      <Route path="/workers/view/:id" component={Worker} />
-                      <Route path="/workers/view" component={Workers} />
+
+                      <Route path="/customer/:id" component={Customer} />
+
+                      <Route path="/workers" component={Workers} />
+
                       <Route
-                        path="/workers/register"
+                        path="/worker/register"
                         component={RegisterWorker}
                       />
+
+                      <Route path="/worker/:id" component={Worker} />
+
+                      <Route path="/orders" component={Orders} />
+                      <Route path="/order/:id" component={Order} />
+                      <Route path="/order" component={Order} />
+
                       <Route path="/sellings/sell" component={Selling} />
                       <Route path="/settings/rate" component={RateSettings} />
                       <Route path="/settings/app" component={AppSettings} />
@@ -78,4 +100,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const actions = {
+  fetchCustomers,
+  fetchWorkers,
+  fetchOrders
+};
+
+export default withRouter(
+  connect(
+    () => ({}),
+    actions
+  )(App)
+);

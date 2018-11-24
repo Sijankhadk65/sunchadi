@@ -5,7 +5,7 @@ import {
   asyncActionStart,
   asyncActionEnd,
   asyncActionError
-} from "../async/asyncActions";
+} from "../Async/asyncActions";
 
 import firestore, { firebase } from "../../app/config/firebaseConfig";
 
@@ -62,7 +62,7 @@ export const searchWorker = term => {
 
 export const addWorker = (image, workerInfo, history) => {
   return async dispatch => {
-    dispatch(asyncActionStart())
+    dispatch(asyncActionStart());
     try {
       if (image) {
         const storage = firebase.storage().ref(cuid());
@@ -74,7 +74,7 @@ export const addWorker = (image, workerInfo, history) => {
         ...workerInfo,
         history: []
       });
-      history.push("/workers/view");
+      history.push("/workers");
       dispatch(asyncActionEnd());
     } catch (error) {
       console.log(error);
@@ -85,14 +85,14 @@ export const addWorker = (image, workerInfo, history) => {
 
 export const deleteWorker = (id, history) => {
   return async dispatch => {
-    dispatch(asyncActionStart())
+    dispatch(asyncActionStart());
     try {
       await firestore
         .collection("workers")
         .doc(id)
         .delete();
-      history.push("/workers/view");
-      dispatch(asyncActionEnd())
+      history.push("/workers");
+      dispatch(asyncActionEnd());
     } catch (error) {
       console.log(error);
       dispatch(asyncActionError());
@@ -102,7 +102,7 @@ export const deleteWorker = (id, history) => {
 
 export const updateWorker = (worker, history) => {
   return async dispatch => {
-    dispatch(asyncActionStart())
+    dispatch(asyncActionStart());
     try {
       await firestore
         .collection("workers")
@@ -113,8 +113,8 @@ export const updateWorker = (worker, history) => {
           phone: worker.phone,
           history: worker.history
         });
-      history.push("/workers/view");
-      dispatch(asyncActionEnd())
+      history.push("/workers");
+      dispatch(asyncActionEnd());
     } catch (error) {
       console.log(error);
       dispatch(asyncActionEnd());

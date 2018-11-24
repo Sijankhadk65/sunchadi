@@ -51,5 +51,27 @@ export default {
       }),
       isRequired({ message: "Worker Age Is Required" })
     )()
+  }),
+  orderValidation: combineValidators({
+    name: composeValidators(
+      isRequired({ message: "Customer Name Is Required" })
+    )(),
+    weight: composeValidators(
+      hasLengthBetween(1, 5)({
+        message: "Weight Is Either Too Much Or Too Less"
+      }),
+      isRequired({ message: "Weight Is Required" })
+    )(),
+    description: composeValidators(
+      hasLengthBetween(5, 150)({
+        message: "Description Is Either Too Long Or Too Short (5-150)"
+      })
+    )(),
+    submitDate: composeValidators(
+      isRequired({ message: "Submit Date Is Required" })
+    )(),
+    rate: composeValidators(
+      isRequired({ message: "Rate Is Required" })
+    )()
   })
 };
