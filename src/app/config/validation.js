@@ -70,8 +70,11 @@ export default {
     submitDate: composeValidators(
       isRequired({ message: "Submit Date Is Required" })
     )(),
-    rate: composeValidators(
-      isRequired({ message: "Rate Is Required" })
+    item: composeValidators(
+      hasLengthBetween(3, 25)({
+        message: "Item Should 3-25 Characters Long."
+      }),
+      isRequired({ message: "Item Name Is Required" })
     )()
   })
 };
