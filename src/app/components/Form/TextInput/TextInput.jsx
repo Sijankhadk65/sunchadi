@@ -5,7 +5,15 @@ import "./TextInput.css";
 
 const id = cuid();
 
-export default ({ input, width, type, label, meta: { touched, error } }) => {
+export default ({
+  input,
+  width,
+  type,
+  disabled,
+  label,
+  getValue,
+  meta: { touched, error }
+}) => {
   return (
     <div>
       <label className="label" htmlFor={id}>
@@ -17,8 +25,9 @@ export default ({ input, width, type, label, meta: { touched, error } }) => {
         type={type}
         width={width}
         value={input.value}
+        disabled={disabled}
         autoComplete="off"
-        className="input" 
+        className="input"
         onChange={input.onChange}
       />
       {touched && error && <p className="error">{error}</p>}

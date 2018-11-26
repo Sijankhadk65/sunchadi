@@ -29,12 +29,14 @@ import Order from "../../features/Order/Order/Order";
 import { fetchCustomers } from "../../features/Customers/customerActions";
 import { fetchWorkers } from "../../features/Workers/workerActions";
 import { fetchOrders } from "../../features/Order/orderActions";
+import { fetchItems } from "../../features/Settings/settingActions";
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchCustomers();
     this.props.fetchWorkers();
     this.props.fetchOrders();
+    this.props.fetchItems();
   }
   render() {
     return (
@@ -86,6 +88,7 @@ class App extends Component {
                       <Route path="/order" component={Order} />
 
                       <Route path="/sellings/sell" component={Selling} />
+                      
                       <Route path="/settings/rate" component={RateSettings} />
                       <Route path="/settings/app" component={AppSettings} />
                     </Switch>
@@ -103,7 +106,7 @@ class App extends Component {
 const actions = {
   fetchCustomers,
   fetchWorkers,
-  fetchOrders
+  fetchOrders, fetchItems
 };
 
 export default withRouter(

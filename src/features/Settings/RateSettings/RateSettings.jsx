@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import validate from "../../../app/config/validation";
 
-import Grid from "../../../app/components/Grid/Grid";
+// import Grid from "../../../app/components/Grid/Grid";
 
 class Settings extends Component {
   render() {

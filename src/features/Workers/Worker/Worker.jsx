@@ -11,7 +11,7 @@ import Loader from "../../../app/common/Loader/Loader";
 import Grid from "../../../app/components/Grid/Grid";
 import Button from "../../../app/components/Button/Button";
 import TextInput from "../../../app/components/Form/TextInput/TextInput";
-import { H1, H2, H3 } from '../../../app/components/Heading/Heading';
+import { H1 } from '../../../app/components/Heading/Heading';
 import Collapse from '../../../app/components/Collapse/Collapse'
 import Div from "../../../app/common/Div/Div";
 

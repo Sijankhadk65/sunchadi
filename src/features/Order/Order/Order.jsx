@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, formValueSelector } from "redux-form";
 import { connect } from "react-redux";
 
 import { placeOrder, updateOrder } from "../orderActions";
@@ -15,25 +15,56 @@ import TextInput from "../../../app/components/Form/TextInput/TextInput";
 import TextArea from "../../../app/components/Form/TextArea/TextArea";
 
 class Order extends Component {
+  state = {
+    weight: 0,
+    loss: 0,
+    wages: 0
+  };
+  handleItemChange = name => {
+    console.log(name)
+    const rate = this.props.items.find(i => i.value === name).price
+    this.props.change('rate', rate)
+  }
   handleOrderPlace = values => {
+    console.log(values);
     values.weight = +values.weight;
     values.wages = +values.wages;
-    
+
     if (this.props.initialValues.id) {
       return this.props.updateOrder(
-        {
-          ...values,
-          id: this.props.match.params.id
-        },
+        { ...values, id: this.props.match.params.id },
         this.props.history
       );
     }
     values.completed = false;
     values.orderedDate = new Date().toLocaleDateString();
     const splitedDate = values.orderedDate.split("/");
-    const formatedDate = splitedDate[2] + "-" + splitedDate[0] + "-" + splitedDate[1];
+    const formatedDate =
+      splitedDate[2] + "-" + splitedDate[0] + "-" + splitedDate[1];
     values.orderedDate = formatedDate;
     this.props.placeOrder(values, this.props.history);
+  };
+  handleInputChange = (e, value) => {
+    this.setState({
+      [e.target.name]: +value
+    });
+    const { weight, loss, wages } = this.state;
+    const rate = this.props.rate;
+    let total = 0;
+    switch (e.target.name) {
+      case "weight":
+        total = rate * (+value / 10 + loss / 10) + wages;
+        break;
+      case "loss":
+        total = rate * (weight / 10 + +value / 10) + wages;
+        break;
+      case "wages":
+        total = rate * (weight / 10 + loss / 10) + +value;
+        break;
+      default:
+        total = 0;
+    }
+    this.props.change("total", total);
   };
   render() {
     const { handleSubmit, loading } = this.props;
@@ -55,12 +86,11 @@ class Order extends Component {
                   component={DropDown}
                 />
                 <Field
-                  name="weight"
-                  type="number"
-                  label="Given Wt (gm)"
+                  name="submitDate"
+                  type="date"
+                  label="Submit Date"
                   component={TextInput}
                 />
-
                 <Field
                   name="description"
                   type="text"
@@ -74,18 +104,50 @@ class Order extends Component {
                   options={this.props.workers}
                   component={DropDown}
                 />
+                <Field
+                  name="item"
+                  type="text"
+                  label="Item Name"
+                  options={this.props.items}
+                  getSelectedValue={name => this.handleItemChange(name)}                  
+                  component={DropDown}
+                />
               </Grid.Column>
               <Grid.Column>
                 <Field
-                  name="submitDate"
-                  type="date"
-                  label="Submit Date"
+                  disabled={true}
+                  name="rate"
+                  type="number"
+                  label="Rate"
+                  onChange={this.handleInputChange}
+                  component={TextInput}
+                />
+                <Field
+                  name="weight"
+                  type="number"
+                  label="Weight"
+                  onChange={this.handleInputChange}
+                  component={TextInput}
+                />
+                <Field
+                  name="loss"
+                  type="number"
+                  label="Loss"
+                  onChange={this.handleInputChange}
                   component={TextInput}
                 />
                 <Field
                   name="wages"
                   type="number"
                   label="Wages"
+                  onChange={this.handleInputChange}
+                  component={TextInput}
+                />
+                <Field
+                  name="total"
+                  disabled={true}
+                  type="number"
+                  label="Total"
                   component={TextInput}
                 />
               </Grid.Column>
@@ -112,12 +174,19 @@ const mapState = (state, props) => {
     order = state.orders.orders.find(c => c.id === id);
   }
   return {
+    rate: formValueSelector("orderForm")(state, "rate"),
     loading: state.async.loading,
     initialValues: order === undefined ? {} : order,
     customers: state.customers.customers.map(customer => ({
       id: customer.id,
       label: customer.name,
       value: customer.name
+    })),
+    items: state.config.items.map(i => ({
+      id: i.id,
+      label: i.name,
+      value: i.name,
+      price: i.price
     })),
     workers: state.workers.workers.map(worker => ({
       id: worker.id,
@@ -134,7 +203,7 @@ export default connect(
   actions
 )(
   reduxForm({
-    form: "sellingForm",
+    form: "orderForm",
     enableReinitialize: true,
     validate: validate.orderValidation
   })(Order)

@@ -14,7 +14,7 @@ class DropDown extends Component {
     });
   }
   handleInputChange = e => {
-    this.props.input.onChange(e.target.value)
+    this.props.input.onChange(e.target.value);
     this.setState({
       showOptions: true,
       options: this.props.options.filter(option =>
@@ -26,6 +26,7 @@ class DropDown extends Component {
     this.setState({
       showOptions: false
     });
+    this.props.getSelectedValue(value);
     this.props.input.onChange(value);
   };
   render() {

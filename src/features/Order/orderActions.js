@@ -18,9 +18,9 @@ const fetchOrdersAction = orders => {
 
 export const fetchOrders = () => {
   return async dispatch => {
-    try {
-      dispatch(asyncActionStart());
-      firestore.collection("orders").onSnapshot(o => {
+    dispatch(asyncActionStart());
+    firestore.collection("orders").onSnapshot(
+      o => {
         let orders = [];
         o.forEach(order => {
           orders = [
@@ -37,10 +37,11 @@ export const fetchOrders = () => {
         ];
         dispatch(fetchOrdersAction(orders));
         dispatch(asyncActionEnd());
-      });
-    } catch (eror) {
-      dispatch(asyncActionError());
-    }
+      },
+      error => {
+        dispatch(asyncActionError());
+      }
+    );
   };
 };
 
