@@ -19,6 +19,7 @@ import Worker from "../../features/Workers/Worker/Worker";
 import RegisterWorker from "../../features/Workers/RegisterWorker/RegisterWorker";
 
 import Selling from "../../features/Sellings/Sellling/Selling";
+import Sellings from '../../features/Sellings/Sellings/Sellings'
 
 import RateSettings from "../../features/Settings/RateSettings/RateSettings";
 import AppSettings from "../../features/Settings/AppSettings/AppSettings";
@@ -29,14 +30,19 @@ import Order from "../../features/Order/Order/Order";
 import { fetchCustomers } from "../../features/Customers/customerActions";
 import { fetchWorkers } from "../../features/Workers/workerActions";
 import { fetchOrders } from "../../features/Order/orderActions";
-import { fetchItems } from "../../features/Settings/settingActions";
-
+import {
+  fetchOrderItems,
+  fetchSellingItems
+} from "../../features/Settings/settingActions";
+import { fetchSellings } from "../../features/Sellings/sellingActions";
 class App extends Component {
   componentDidMount() {
     this.props.fetchCustomers();
     this.props.fetchWorkers();
     this.props.fetchOrders();
-    this.props.fetchItems();
+    this.props.fetchOrderItems();
+    this.props.fetchSellingItems();
+    this.props.fetchSellings();
   }
   render() {
     return (
@@ -87,8 +93,9 @@ class App extends Component {
                       <Route path="/order/:id" component={Order} />
                       <Route path="/order" component={Order} />
 
-                      <Route path="/sellings/sell" component={Selling} />
-                      
+                      <Route path="/selling" component={Selling} />
+                      <Route path="/sellings" component={Sellings} />
+
                       <Route path="/settings/rate" component={RateSettings} />
                       <Route path="/settings/app" component={AppSettings} />
                     </Switch>
@@ -106,7 +113,10 @@ class App extends Component {
 const actions = {
   fetchCustomers,
   fetchWorkers,
-  fetchOrders, fetchItems
+  fetchOrders,
+  fetchOrderItems,
+  fetchSellingItems,
+  fetchSellings
 };
 
 export default withRouter(

@@ -26,7 +26,9 @@ class DropDown extends Component {
     this.setState({
       showOptions: false
     });
-    this.props.getSelectedValue(value);
+    if (this.props.getSelectedValue) {
+      this.props.getSelectedValue(value);
+    }
     this.props.input.onChange(value);
   };
   render() {

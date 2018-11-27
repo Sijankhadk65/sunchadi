@@ -1,37 +1,75 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect, Link } from "react-router-dom";
+import { FaDollarSign, FaEye, FaPlus, FaTruck } from 'react-icons/fa'
 
-import Items from "./Items/Items";
-import AddItem from "./AddItem/AddItem";
+import AddOrderItem from "./OrderItems/AddOrderItem/AddOrderItem";
+import OrderItems from "./OrderItems/OrderItems/OrderItems";
+import AddSellingItem from "./SellingItems/AddSellingItem/AddSellingItem";
+import SellingItems from "./SellingItems/SellingItems/SellingItems";
 
+import Collapse from "../../../app/components/Collapse/Collapse";
 import Grid from "../../../app/components/Grid/Grid";
+import Loader from "../../../app/common/Loader/Loader";
 
 class AppSettings extends Component {
   render() {
-    return (
-      <Grid gutterWidth="3rem">
+    return <Grid gutterWidth="3rem">
         <Grid.Row columns={4}>
           <Grid.Column span={3}>
             <Switch>
-              <Redirect exact from="/settings/app" to="/settings/app/items" />
-              <Route path="/settings/app/item/:id" component={AddItem} />
-              <Route path="/settings/app/item/" component={AddItem} />
-              <Route path="/settings/app/items" component={Items} />
+              <Redirect exact from="/settings/app" to="/settings/app/selling-items" />
+              <Route path="/settings/app/order-item/:id" component={AddOrderItem} />
+              <Route path="/settings/app/order-item/" component={AddOrderItem} />
+              <Route path="/settings/app/order-items" component={OrderItems} />
+              <Route path="/settings/app/selling-item/:id" component={AddSellingItem} />
+              <Route path="/settings/app/Selling-item/" component={AddSellingItem} />
+              <Route path="/settings/app/selling-items" component={SellingItems} />
             </Switch>
           </Grid.Column>
           <Grid.Column>
-            <ul>
-              <li>
-                <Link to="/settings/app/item">Add Item</Link>
+            <ul className="settings__sidebar">
+              <li className="settings__siderbar--item">
+                <Collapse>
+                  <Collapse.Trigger>
+                    <FaDollarSign /> &nbsp;&nbsp; Selling Item
+                  </Collapse.Trigger>
+                  <Collapse.Content>
+                    <div className="settings__sidebar--item__subitem">
+                      <Link to="/settings/app/selling-item">
+                        <FaPlus /> &nbsp;&nbsp; Add Selling Item
+                      </Link>
+                    </div>
+                    <div className="settings__sidebar--item__subitem">
+                      <Link to="/settings/app/selling-items">
+                        <FaEye /> &nbsp;&nbsp; View Selling Items
+                      </Link>
+                    </div>
+                  </Collapse.Content>
+                </Collapse>
               </li>
-              <li>
-                <Link to="/settings/app/items">Items</Link>
+              <li className="settings__siderbar--item">
+                <Collapse>
+                  <Collapse.Trigger>
+                    <FaTruck /> &nbsp;&nbsp; Order Item
+                  </Collapse.Trigger>
+                  <Collapse.Content>
+                    <div className="settings__sidebar--item__subitem">
+                      <Link to="/settings/app/order-item">
+                        <FaPlus /> &nbsp;&nbsp; Add Order Item
+                      </Link>
+                    </div>
+                    <div className="settings__sidebar--item__subitem">
+                      <Link to="/settings/app/order-items">
+                        <FaEye /> &nbsp;&nbsp; View Order Items
+                      </Link>
+                    </div>
+                  </Collapse.Content>
+                </Collapse>
               </li>
             </ul>
           </Grid.Column>
         </Grid.Row>
-      </Grid>
-    );
+      </Grid>;
   }
 }
 

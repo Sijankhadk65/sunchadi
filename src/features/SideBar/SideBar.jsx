@@ -36,12 +36,12 @@ class SideBar extends Component {
               </div>
             </Collapse.Trigger>
             <Collapse.Content style={collapseContent}>
-              <NavLink to="/sellings/sell">
+              <NavLink to="/selling">
                 <div className="subItem">
                   <FaMoneyCheckAlt /> &nbsp;&nbsp; Sell
                 </div>
               </NavLink>
-              <NavLink to="/selllings">
+              <NavLink to="/sellings">
                 <div className="subItem">
                   <FaClock /> &nbsp;&nbsp;{" "}
                   <span style={{ fontSize: "1.8rem" }}>Selling History</span>

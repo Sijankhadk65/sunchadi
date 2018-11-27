@@ -85,3 +85,35 @@ a:visited {
   border-radius: 4px;
   color: #0a2239;
 }
+
+/* .settings__sidebar--item__subitem */
+.settings__sidebar {
+  line-height: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  /* border: 2px solid; */
+  color: #fff;
+  border-radius: 4px;
+  padding: 1rem 3rem;
+  margin-left: 1.5rem;
+  list-style: none;
+  background: #34495e;
+}
+
+.settings__sidebar--item {
+  padding: 1rem 3rem;
+}
+
+.settings__sidebar--item__subitem a {
+  border-radius: 4px;
+  padding: 1rem 1.5rem;
+  margin-left: 2rem;
+}
+
+.settings__sidebar--item:hover,
+.settings__sidebar--item__subitem:hover a {
+  color: rgb(71, 71, 71);
+  background: #fff;
+}

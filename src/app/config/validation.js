@@ -76,5 +76,34 @@ export default {
       }),
       isRequired({ message: "Item Name Is Required" })
     )()
+  }),
+  addOrderItemValidation: combineValidators({
+    name: composeValidators(
+      hasLengthBetween(3, 25)({
+        message: "Item Shoould be 3-25 Characters Long"
+      }),
+      isRequired({ message: "Item Name Is Required" })
+    )(),
+    category: composeValidators(
+      hasLengthBetween(3, 25)({
+        message: "Item Category Should be 3-25 Characters Long"
+      }),
+      isRequired({ message: "Item Category Is Required" })
+    )(),
+    price: composeValidators(
+      isRequired({ message: "Item Price Is Required" })
+    )()
+  }),
+  addToSellingItem: combineValidators({
+    code: isRequired({ message: "Item Code Is Required" }),
+    finalWt: isRequired({ message: "Item Code Is Required" }),
+    loss: isRequired({ message: "Item Code Is Required" }),
+    wages: isRequired({ message: "Item Code Is Required" }),
+    name: isRequired({ message: "Item Code Is Required" })
+  }),
+  sellingForm: combineValidators({
+    cust_name: isRequired({ message: 'Customer Name Is Required' }),
+    address: isRequired({ message: 'Customer Address Is Required' }),
+    contact: isRequired({message: 'Customer Contact Is Required'}),
   })
 };

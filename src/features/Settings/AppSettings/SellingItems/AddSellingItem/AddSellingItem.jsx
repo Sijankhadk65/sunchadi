@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
-import validate from "../../../../app/config/validation";
-import { addItem, updateItem } from "../../settingActions";
+import validate from "../../../../../app/config/validation";
+import { addSellingItem, updateSellingItem } from "../../../settingActions";
 
-import Loader from '../../../../app/common/Loader/Loader'
-import Grid from "../../../../app/components/Grid/Grid";
-import TextInput from "../../../../app/components/Form/TextInput/TextInput";
-import Button from "../../../../app/components/Button/Button";
-import { H1 } from "../../../../app/components/Heading/Heading";
+import Loader from "../../../../../app/common/Loader/Loader";
+import Grid from "../../../../../app/components/Grid/Grid";
+import TextInput from "../../../../../app/components/Form/TextInput/TextInput";
+import Button from "../../../../../app/components/Button/Button";
+import { H1 } from "../../../../../app/components/Heading/Heading";
 
-class AddItems extends Component {
+class AddSellingItem extends Component {
   handleItemAdd = values => {
     values.price = +values.price;
     if (this.props.initialValues.id) {
-      return this.props.updateItem(
+      return this.props.updateSellingItem(
         {
           ...values,
           id: this.props.match.params.id
@@ -23,12 +23,12 @@ class AddItems extends Component {
         this.props.history
       );
     }
-    this.props.addItem(values, this.props.history);
+    this.props.addSellingItem(values, this.props.history);
   };
   render() {
     const { handleSubmit, loading } = this.props;
     if (loading) {
-      return <Loader message="Processing Actions" />
+      return <Loader message="Processing Actions" />;
     }
     return (
       <div>
@@ -77,20 +77,20 @@ const mapState = (state, props) => {
   let item = {};
   const id = props.match.params.id;
   if (id) {
-    item = state.config.items.find(i => i.id === id);
+    item = state.config.sellingItems.find(i => i.id === id);
   }
   return {
     loading: state.async.loading,
     initialValues: item === undefined ? {} : item,
-    items: state.config.items.map(i => ({
+    items: state.config.sellingItems.map(i => ({
       name: i.name
     }))
   };
 };
 
 const actions = {
-  updateItem,
-  addItem
+  updateSellingItem,
+  addSellingItem
 };
 
 export default connect(
@@ -100,6 +100,6 @@ export default connect(
   reduxForm({
     form: "itemForm",
     enableReinitialize: true,
-    validate: validate.settingsValidation
-  })(AddItems)
+    validate: validate.addOrderItemValidation
+  })(AddSellingItem)
 );

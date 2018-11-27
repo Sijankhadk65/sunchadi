@@ -182,7 +182,7 @@ const mapState = (state, props) => {
       label: customer.name,
       value: customer.name
     })),
-    items: state.config.items.map(i => ({
+    items: state.config.orderItems.map(i => ({
       id: i.id,
       label: i.name,
       value: i.name,
