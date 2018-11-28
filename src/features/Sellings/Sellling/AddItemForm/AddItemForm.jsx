@@ -20,7 +20,6 @@ class AddToSellingForm extends Component {
         wages: ""
       };
     }
-    console.log({ value, item });
     const { finalWt, loss, name, wages } = item;
     this.props.change("finalWt", finalWt);
     this.props.change("loss", loss);
@@ -33,6 +32,7 @@ class AddToSellingForm extends Component {
       return this.props.updateItem(item);
     }
     item.id = cuid();
+
     this.props.handleItemAdd(item);
     this.props.dispatch(reset("addToSellingItem"));
   };
@@ -77,7 +77,7 @@ class AddToSellingForm extends Component {
             btnStyle="primary"
             onClick={this.props.handleSubmit(this.handleItemAdd)}
           >
-            {this.props.initialValues.id ? 'Update Item' : 'Add Items'}
+            {this.props.initialValues.id ? "Update Item" : "Add Item"}
           </Button>
         </form>
       </div>
@@ -102,6 +102,6 @@ export default connect(
   reduxForm({
     form: "addToSellingItem",
     enableReinitialize: true,
-  validate: validate.addToSellingItem
+    validate: validate.addToSellingItem
   })(AddToSellingForm)
 );

@@ -26,7 +26,6 @@ export const fetchSellings = () => {
             }
           ];
         });
-        console.log(sellings);
         dispatch(fetchSellingsAction(sellings));
         dispatch(asyncActionEnd());
       },
