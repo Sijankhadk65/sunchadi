@@ -27,6 +27,8 @@ import AppSettings from "../../features/Settings/AppSettings/AppSettings";
 import Orders from "../../features/Order/Orders/Orders";
 import Order from "../../features/Order/Order/Order";
 
+import WorkShop from '../../features/WorkSpace/WorkSpace'
+
 import { fetchCustomers } from "../../features/Customers/customerActions";
 import { fetchWorkers } from "../../features/Workers/workerActions";
 import { fetchOrders } from "../../features/Order/orderActions";
@@ -98,6 +100,7 @@ class App extends Component {
 
                       <Route path="/settings/rate" component={RateSettings} />
                       <Route path="/settings/app" component={AppSettings} />
+                      <Route path="/workshop" component={WorkShop} />
                     </Switch>
                   </Grid.Column>
                 </Grid.Row>

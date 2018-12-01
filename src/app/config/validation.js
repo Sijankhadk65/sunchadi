@@ -96,10 +96,10 @@ export default {
   }),
   addToSellingItem: combineValidators({
     code: isRequired({ message: "Item Code Is Required" }),
-    finalWt: isRequired({ message: "Item Code Is Required" }),
-    loss: isRequired({ message: "Item Code Is Required" }),
-    wages: isRequired({ message: "Item Code Is Required" }),
-    name: isRequired({ message: "Item Code Is Required" })
+    finalWt: isRequired({ message: "Item Weight Is Required" }),
+    loss: isRequired({ message: "Item Loss Is Required" }),
+    wages: isRequired({ message: "Item Wages Is Required" }),
+    name: isRequired({ message: "Item Name Is Required" })
   }),
   sellingForm: combineValidators({
     cust_name: isRequired({ message: 'Customer Name Is Required' }),

@@ -26,10 +26,10 @@ a:visited {
   text-decoration: none;
   color: inherit;
 }
-
+/* 
 ::-webkit-scrollbar {
   width: 0px;
-}
+} */
 
 .active .subItem {
   margin: 0.2rem 0;

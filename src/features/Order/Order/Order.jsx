@@ -97,13 +97,15 @@ class Order extends Component {
                   label="Description"
                   component={TextArea}
                 />
-                <Field
-                  name="worker"
-                  type="text"
-                  label="Assign Worker"
-                  options={this.props.workers}
-                  component={DropDown}
-                />
+                {this.props.initialValues.id &&
+                  <Field
+                    name="worker"
+                    type="text"
+                    label="Assign Worker"
+                    options={this.props.workers}
+                    component={DropDown}
+                  />
+                }
                 <Field
                   name="item"
                   type="text"

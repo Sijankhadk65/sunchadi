@@ -20,6 +20,9 @@ class RegisterWorker extends Component {
   handleWorkerAdd = values => {
     const { image } = this.state;
     values.age = +values.age;
+    values.phone = +values.phone;
+    values.total = 0;
+    values.paid = 0;
     this.props.addWorker(image, values, this.props.history);
   };
   render() {
