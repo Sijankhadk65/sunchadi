@@ -11,9 +11,7 @@ import validate from "../../../../app/config/validation";
 
 class AddToSellingForm extends Component {
   handleCodeChange = (e, value) => {
-    console.log(value)
     let item = this.props.sellingItems.find(i => i.code === +value);
-    console.log(item)
     if (item === undefined) {
       item = {
         finalWt: "",

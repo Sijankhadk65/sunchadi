@@ -31,6 +31,9 @@ class Selling extends Component {
     this.props.change("total", total.toFixed(2));
   };
   updateItem = item => {
+    this.setState({
+      itemExists: false
+    })
     const newItems = this.state.items.map(i => {
       if (i.id === item.id) {
         return item;

@@ -22,12 +22,15 @@ class DropDown extends Component {
       )
     });
   };
-  handleOptionClick = value => {
+  handleOptionClick = (value, id) => {
     this.setState({
       showOptions: false
     });
     if (this.props.getSelectedValue) {
       this.props.getSelectedValue(value);
+    }
+    if (this.props.getSelectedId) {
+      this.props.getSelectedId(id)
     }
     this.props.input.onChange(value);
   };
@@ -63,7 +66,7 @@ class DropDown extends Component {
                 <div
                   key={option.id}
                   className="select__options--item"
-                  onClick={() => this.handleOptionClick(option.value)}
+                  onClick={() => this.handleOptionClick(option.value, option.id)}
                 >
                   {option.label}
                 </div>

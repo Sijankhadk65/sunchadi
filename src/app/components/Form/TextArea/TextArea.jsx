@@ -9,7 +9,7 @@ export default ({ input, label, meta: { touched, error } }) => (
     <label className="label" htmlFor={id}>
       {label}
     </label>
-    <textarea {...input} className="input" name="" id={id} cols="30" rows="5" />
+    <textarea {...input} style={{ resize: 'none' }} className="input" name="" id={id} cols="30" rows="5" />
     {touched && error && <p className="error">{error}</p>}
   </div>
 );

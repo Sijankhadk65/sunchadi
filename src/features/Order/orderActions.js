@@ -59,16 +59,27 @@ export const placeOrder = (orderInfo, history) => {
 };
 
 export const updateOrder = (orderInfo, history) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    console.log('reaching!')
     try {
       dispatch(asyncActionStart());
+      const workers = getState().workers.workers
+      const worker = workers.find(w => w.id === orderInfo.workerId)
+      const history = worker.history || []
+      if (!history.includes(orderInfo.id)) {
+        worker.history.push(orderInfo.id)
+      }
+      await firestore.collection('workers').doc(orderInfo.workerId).update(worker)
+      
       await firestore
         .collection("orders")
         .doc(orderInfo.id)
         .update(orderInfo);
+      console.log('reaching!')
       history.push("/orders");
       dispatch(asyncActionEnd());
     } catch (error) {
+      console.log(error)
       dispatch(asyncActionError());
     }
   };

@@ -11,7 +11,7 @@ const Grid = ({ children, columns, style, gutterWidth = "6rem" }) => {
     <div className={`grid${gridId}`} style={style}>
       <style>
         {`.grid${gridId} .row {
-            max-width: 114rem;
+            max-width: 100%;
           }
           .grid${gridId} .row:not(:last-child) {
             margin-bottom: 8rem;

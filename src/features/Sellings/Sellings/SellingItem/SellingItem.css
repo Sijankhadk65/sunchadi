@@ -1,8 +1,5 @@
-.order__item {
-  display: flex;
+.selling__item {
   font-size: 1.7rem;
-  justify-content: space-around;
-  align-items: center;
   padding: 1rem;
   background: #441678;
   margin: 0.2rem 0rem;

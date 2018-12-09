@@ -5,6 +5,7 @@ import "./SellingItem.css";
 
 import Collapse from "../../../../app/components/Collapse/Collapse";
 import { H3 } from "../../../../app/components/Heading/Heading";
+import Grid from '../../../../app/components/Grid/Grid'
 
 export default withRouter(({ selling }) => {
   const { cust_name, soldDate, total, items } = selling;
@@ -12,16 +13,26 @@ export default withRouter(({ selling }) => {
     <div>
       <Collapse>
         <Collapse.Trigger>
-          <div className="order__item" style={{ background: "#441678" }}>
-            <h3>{cust_name}</h3>
-            <h3>{soldDate}</h3>
-            <h3>{total}</h3>
+          <div className="selling__item" style={{ background: "#441678" }}>
+            <Grid gutterWidth="2rem" style={{ marginLeft: '6rem' }}>
+              <Grid.Row columns={3}>
+                <Grid.Column>
+                  <h3>{cust_name}</h3>
+                </Grid.Column>
+                <Grid.Column>
+                  <h3>{soldDate}</h3>
+                </Grid.Column>
+                <Grid.Column>
+                  <h3>{total}</h3>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </div>
         </Collapse.Trigger>
         <Collapse.Content>
           <div className="order__info">
             {items.map((item, index) => (
-              <div>
+              <div key={index}>
                 <H3 center>Item {index + 1}</H3>
                 <table key={item.id} className="order__info--table">
                   <tbody>

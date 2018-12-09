@@ -12,22 +12,27 @@ import Grid from "../../../app/components/Grid/Grid";
 import Button from "../../../app/components/Button/Button";
 import TextInput from "../../../app/components/Form/TextInput/TextInput";
 import { H1 } from "../../../app/components/Heading/Heading";
-import Collapse from "../../../app/components/Collapse/Collapse";
 import Div from "../../../app/common/Div/Div";
+
+import WorkerHistory from './WorkerHistory/WorkerHistory'
 
 class Worker extends Component {
   state = {
-    payError: false
+    payError: false,
+    history: []
+  };
+  componentDidMount() {
+    console.log(this.props.initialValues);
   }
   handlePayChange = (e, value) => {
-    this.setState({ 
+    this.setState({
       payError: false
-    })
+    });
     if (this.props.initialValues.total < value) {
-      return this.setState({ payError: true })
+      return this.setState({ payError: true });
     }
-    this.props.change('total')
-  }
+    this.props.change("total");
+  };
   handleWorkerUpdate = values => {
     console.log(values);
     if (values.paid !== "") {
@@ -121,7 +126,9 @@ class Worker extends Component {
                   onChange={this.handlePayChange}
                   component={TextInput}
                 />
-                {this.state.payError && <p className="error">Not Enough Balance</p>}
+                {this.state.payError && (
+                  <p className="error">Not Enough Balance</p>
+                )}
                 <Button
                   type="submit"
                   btnStyle="primary"
@@ -133,27 +140,7 @@ class Worker extends Component {
             </Grid.Row>
           </Grid>
           <H1>Work Records</H1>
-          {this.props.initialValues.history &&
-            this.props.initialValues.history.map(h => (
-              <Collapse>
-                <Collapse.Trigger>
-                  <div className="list_trigger">
-                    Start Date <span className="mark">{h.startDate}</span>
-                    Complete Date <span className="mark">
-                      {h.completeDate}
-                    </span>{" "}
-                    <span style={{ fontSize: "1.5rem" }}>&#43;</span>
-                  </div>
-                </Collapse.Trigger>
-                <Collapse.Content>
-                  <ul className="list">
-                    {h.items.map((item, index) => (
-                      <h3>Work</h3>
-                    ))}
-                  </ul>
-                </Collapse.Content>
-              </Collapse>
-            ))}
+          <WorkerHistory history={this.props.initialValues.history} />
         </form>
       </Div>
     );
@@ -162,6 +149,7 @@ class Worker extends Component {
 
 const mapState = (state, props) => {
   const workers = state.workers.workers;
+  const orders = state.orders.orders;
   const loading = state.async.loading;
   const id = props.match.params.id;
   let worker = null;
@@ -169,6 +157,7 @@ const mapState = (state, props) => {
     worker = workers.find(c => c.id === id);
   }
   return {
+    orders,
     initialValues: worker === undefined ? {} : worker,
     loading
   };

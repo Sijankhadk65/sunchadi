@@ -18,21 +18,26 @@ class Order extends Component {
   state = {
     weight: 0,
     loss: 0,
-    wages: 0
+    wages: 0,
+    workerId: null
   };
-  handleItemChange = name => {
-    console.log(name)
-    const rate = this.props.items.find(i => i.value === name).price
-    this.props.change('rate', rate)
+  handleWorkerChange = id => {
+    this.setState({
+      workerId: id
+    })
   }
+  handleItemChange = name => {
+    console.log(name);
+    const rate = this.props.items.find(i => i.value === name).price;
+    this.props.change("rate", rate);
+  };
   handleOrderPlace = values => {
-    console.log(values);
     values.weight = +values.weight;
     values.wages = +values.wages;
 
     if (this.props.initialValues.id) {
       return this.props.updateOrder(
-        { ...values, id: this.props.match.params.id },
+        { ...values, id: this.props.match.params.id, workerId: this.state.workerId },
         this.props.history
       );
     }
@@ -44,14 +49,14 @@ class Order extends Component {
     values.orderedDate = formatedDate;
     this.props.placeOrder(values, this.props.history);
   };
-  handleInputChange = (e, value) => {
+  handleInputChange = (e, value, _, name) => {
     this.setState({
-      [e.target.name]: +value
+      [name]: +value
     });
     const { weight, loss, wages } = this.state;
     const rate = this.props.rate;
     let total = 0;
-    switch (e.target.name) {
+    switch (name) {
       case "weight":
         total = rate * (+value / 10 + loss / 10) + wages;
         break;
@@ -97,21 +102,22 @@ class Order extends Component {
                   label="Description"
                   component={TextArea}
                 />
-                {this.props.initialValues.id &&
+                {this.props.initialValues.id && (
                   <Field
                     name="worker"
                     type="text"
                     label="Assign Worker"
                     options={this.props.workers}
+                    getSelectedId={id => this.handleWorkerChange(id)}
                     component={DropDown}
                   />
-                }
+                )}
                 <Field
                   name="item"
                   type="text"
                   label="Item Name"
                   options={this.props.items}
-                  getSelectedValue={name => this.handleItemChange(name)}                  
+                  getSelectedValue={name => this.handleItemChange(name)}
                   component={DropDown}
                 />
               </Grid.Column>
@@ -121,7 +127,6 @@ class Order extends Component {
                   name="rate"
                   type="number"
                   label="Rate"
-                  onChange={this.handleInputChange}
                   component={TextInput}
                 />
                 <Field
