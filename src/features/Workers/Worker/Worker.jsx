@@ -14,40 +14,37 @@ import TextInput from "../../../app/components/Form/TextInput/TextInput";
 import { H1 } from "../../../app/components/Heading/Heading";
 import Div from "../../../app/common/Div/Div";
 
-import WorkerHistory from './WorkerHistory/WorkerHistory'
+import WorkerHistory from "./WorkerHistory/WorkerHistory";
+import PayForm from "./PayForm/PayForm";
 
 class Worker extends Component {
   state = {
     payError: false,
     history: []
   };
-  componentDidMount() {
-    console.log(this.props.initialValues);
-  }
-  handlePayChange = (e, value) => {
+  handlePayChange = value => {
     this.setState({
       payError: false
     });
     if (this.props.initialValues.total < value) {
       return this.setState({ payError: true });
     }
-    this.props.change("total");
+    this.props.change("total", this.props.initialValues.total - value);
   };
   handleWorkerUpdate = values => {
-    console.log(values);
     if (values.paid !== "") {
       values.total = values.total - values.paid;
     }
     values.paid = 0;
     console.log(values);
-    // this.props.updateWorker(
-    //   {
-    //     ...values,
-    //     id: this.props.initialValues.id,
-    //     history: this.props.initialValues.history
-    //   },
-    //   this.props.history
-    // );
+    this.props.updateWorker(
+      {
+        ...values,
+        id: this.props.initialValues.id,
+        history: this.props.initialValues.history
+      },
+      this.props.history
+    );
   };
   render() {
     const { initialValues, deleteWorker, handleSubmit, loading } = this.props;
@@ -112,30 +109,14 @@ class Worker extends Component {
                 </Button>
               </Grid.Column>
               <Grid.Column>
-                <Field
-                  name="total"
-                  disabled={true}
-                  type="number"
-                  label="Total Wages"
-                  component={TextInput}
+                <PayForm
+                  history={this.props.initialValues.history}
+                  handlePayChange={this.handlePayChange}
+                  handleSubmit={this.props.handleSubmit}
+                  payError={this.state.payError}
+                  initialValues={{total: this.props.initialValues.total}}
+                  handleWorkerUpdate={this.handleWorkerUpdate}
                 />
-                <Field
-                  name="paid"
-                  type="number"
-                  label="Paying Amount"
-                  onChange={this.handlePayChange}
-                  component={TextInput}
-                />
-                {this.state.payError && (
-                  <p className="error">Not Enough Balance</p>
-                )}
-                <Button
-                  type="submit"
-                  btnStyle="primary"
-                  onClick={handleSubmit(this.handleWorkerUpdate)}
-                >
-                  Pay
-                </Button>
               </Grid.Column>
             </Grid.Row>
           </Grid>

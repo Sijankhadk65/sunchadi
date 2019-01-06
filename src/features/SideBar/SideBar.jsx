@@ -26,7 +26,7 @@ class SideBar extends Component {
     return (
       <Sidebar style={sidebar}>
         <Sidebar.Header>
-          <H3 style={h3}>Rohan</H3>
+          <H3 style={h3}>Admin</H3>
         </Sidebar.Header>
         <Sidebar.Content>
           <Collapse>

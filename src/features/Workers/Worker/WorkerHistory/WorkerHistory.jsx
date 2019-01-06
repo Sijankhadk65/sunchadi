@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import Collapse from "../../../../app/components/Collapse/Collapse";
 
-
 class WorkerHistory extends Component {
   render() {
     return (
@@ -55,7 +54,6 @@ class WorkerHistory extends Component {
                 </table>
               </Collapse.Content>
             </Collapse>
-       
           ))}
       </div>
     )

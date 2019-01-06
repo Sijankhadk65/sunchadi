@@ -9,10 +9,14 @@ fb.initializeApp({
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 });
 
+fb.app();
+
 fb.firestore().settings({
   timestampsInSnapshots: true
 });
 
+export const provider = new fb.auth.EmailAuthProvider();
+export const auth = fb.auth();
 export const firebase = fb;
 
 export default fb.firestore();

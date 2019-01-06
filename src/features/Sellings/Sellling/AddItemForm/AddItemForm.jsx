@@ -5,6 +5,7 @@ import { Field, reduxForm, reset } from "redux-form";
 import cuid from "cuid";
 
 import TextInput from "../../../../app/components/Form/TextInput/TextInput";
+import DropDown from "../../../../app/components/Form/DropDown/DropDown";
 import Button from "../../../../app/components/Button/Button";
 
 import validate from "../../../../app/config/validation";
@@ -27,7 +28,8 @@ class AddToSellingForm extends Component {
     this.props.change("wages", wages);
   };
   handleItemAdd = item => {
-    item.price = 58500 * (item.finalWt / 10 + item.loss / 10) + +item.wages;
+    let rate = this.props.applyRates[item.type]
+    item.price = rate * (item.finalWt / 10 + item.loss / 10) + +item.wages;
     if (this.props.initialValues.id) {
       return this.props.updateItem(item);
     }
@@ -52,6 +54,13 @@ class AddToSellingForm extends Component {
             type="number"
             label="Item Weight"
             component={TextInput}
+          />
+          <Field
+            name="type"
+            type="text"
+            label="Item Type"
+            options={this.props.rates}
+            component={DropDown}
           />
           <Field
             name="loss"
@@ -87,6 +96,8 @@ class AddToSellingForm extends Component {
 
 const mapState = state => {
   return {
+    applyRates: state.config.rates,
+    rates: Object.keys(state.config.rates).map(type => ({ label: type, value: type, rate: state.config.rates[type] })),
     sellingItems: state.config.sellingItems
   };
 };

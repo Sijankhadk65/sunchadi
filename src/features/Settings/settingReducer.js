@@ -1,9 +1,18 @@
-import { FETCH_ORDER_ITEMS, FETCH_SELLING_ITEMS } from "./settingConstants";
+import {
+  FETCH_ORDER_ITEMS,
+  FETCH_SELLING_ITEMS,
+  FETCH_RATES
+} from "./settingConstants";
 import { createReducer } from "../../app/common/util/createReducer";
 
 const initState = {
   orderItems: [],
-  sellingItems: []
+  sellingItems: [],
+  rates: {
+    gold_24: 0,
+    gold_22: 0,
+    silver: 0
+  }
 };
 
 const fetchOrderItems = (state = initState, payload) => {
@@ -20,7 +29,15 @@ const fetchSellingItems = (state = initState, payload) => {
   };
 };
 
+const fetchRates = (state = initState, payload) => {
+  return {
+    ...state,
+    rates: payload.rates
+  };
+};
+
 export default createReducer(initState, {
   [FETCH_ORDER_ITEMS]: fetchOrderItems,
-  [FETCH_SELLING_ITEMS]: fetchSellingItems
+  [FETCH_SELLING_ITEMS]: fetchSellingItems,
+  [FETCH_RATES]: fetchRates
 });

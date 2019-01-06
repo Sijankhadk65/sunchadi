@@ -102,17 +102,13 @@ export const deleteWorker = (id, history) => {
 
 export const updateWorker = (worker, history) => {
   return async dispatch => {
+    console.log(worker)
     dispatch(asyncActionStart());
     try {
       await firestore
         .collection("workers")
         .doc(worker.id)
-        .update({
-          name: worker.name,
-          address: worker.address,
-          phone: worker.phone,
-          history: worker.history
-        });
+        .update(worker);
       history.push("/workers");
       dispatch(asyncActionEnd());
     } catch (error) {

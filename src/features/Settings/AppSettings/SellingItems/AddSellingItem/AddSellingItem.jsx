@@ -40,6 +40,12 @@ class AddSellingItem extends Component {
             <Grid.Column>
               <form>
                 <Field
+                  name="code"
+                  type="text"
+                  label="Item Code"
+                  component={TextInput}
+                />
+                <Field
                   name="name"
                   type="text"
                   label="Item Name"

@@ -34,7 +34,8 @@ import { fetchWorkers } from "../../features/Workers/workerActions";
 import { fetchOrders } from "../../features/Order/orderActions";
 import {
   fetchOrderItems,
-  fetchSellingItems
+  fetchSellingItems,
+  fetchRates
 } from "../../features/Settings/settingActions";
 import { fetchSellings } from "../../features/Sellings/sellingActions";
 class App extends Component {
@@ -45,6 +46,7 @@ class App extends Component {
     this.props.fetchOrderItems();
     this.props.fetchSellingItems();
     this.props.fetchSellings();
+    this.props.fetchRates()
   }
   render() {
     return (
@@ -57,16 +59,6 @@ class App extends Component {
           path="/(.+)"
           render={() => (
             <Div>
-              <Grid
-                gutterWidth="0rem"
-                style={{ margin: "1.5rem 3rem", fontSize: "1.3rem" }}
-              >
-                <Grid.Row columns={4}>
-                  <Grid.Column>
-                    <H1>{appName}</H1>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
               <Grid gutterWidth="4rem" style={{ margin: "3rem" }}>
                 <Grid.Row columns={4}>
                   <Grid.Column>
@@ -119,7 +111,8 @@ const actions = {
   fetchOrders,
   fetchOrderItems,
   fetchSellingItems,
-  fetchSellings
+  fetchSellings,
+  fetchRates
 };
 
 export default withRouter(

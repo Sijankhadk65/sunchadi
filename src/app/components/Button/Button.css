@@ -16,6 +16,11 @@
   border-bottom: 3px solid #146b4b;
 }
 
+.btn-disabled {
+  background: grey;
+  border-bottom: 3px solid grey;
+}
+
 .button:active {
   border: 0px solid #146b4b;
   transform: translateY(3px);

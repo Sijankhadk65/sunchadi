@@ -69,8 +69,12 @@ export const updateOrder = (orderInfo, history) => {
       if (!history.includes(orderInfo.id)) {
         worker.history.push(orderInfo.id)
       }
-      await firestore.collection('workers').doc(orderInfo.workerId).update(worker)
       
+      await firestore.collection('workers').doc(orderInfo.workerId).update(worker)
+      await firestore
+        .collection("workers")
+        .doc(orderInfo.workerId)
+        .update({ total: worker.total + orderInfo.wages });
       await firestore
         .collection("orders")
         .doc(orderInfo.id)

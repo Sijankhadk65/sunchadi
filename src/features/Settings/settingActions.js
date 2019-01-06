@@ -1,4 +1,8 @@
-import { FETCH_ORDER_ITEMS, FETCH_SELLING_ITEMS } from "./settingConstants";
+import {
+  FETCH_ORDER_ITEMS,
+  FETCH_SELLING_ITEMS,
+  FETCH_RATES
+} from "./settingConstants";
 import firestore from "../../app/config/firebaseConfig";
 
 import {
@@ -24,6 +28,15 @@ const fetchSellingItemsAction = items => {
     }
   };
 };
+
+const fetchRatesAction = rates => {
+  return {
+    type: FETCH_RATES,
+    payload: {
+      rates
+    }
+  }
+}
 
 export const fetchOrderItems = () => {
   return async dispatch => {
@@ -126,6 +139,30 @@ export const updateSellingItem = (sellingItemDetails, history) => {
         .doc(sellingItemDetails.id)
         .update(sellingItemDetails);
       history.push("/settings/app/selling-items");
+      dispatch(asyncActionEnd());
+    } catch (error) {
+      dispatch(asyncActionError());
+    }
+  };
+};
+
+export const fetchRates = () => {
+  return async dispatch => {
+    dispatch(asyncActionStart());
+    firestore.collection("rates").doc('rates').onSnapshot(rates => {
+      dispatch(fetchRatesAction(rates.data()));
+    })
+  };
+};
+
+export const updateRates = rates => {
+  return async dispatch => {
+    try {
+      dispatch(asyncActionStart());
+      await firestore
+        .collection("rates")
+        .doc("rates")
+        .update(rates);
       dispatch(asyncActionEnd());
     } catch (error) {
       dispatch(asyncActionError());

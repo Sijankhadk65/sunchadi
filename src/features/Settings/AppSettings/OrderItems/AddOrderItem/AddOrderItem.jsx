@@ -81,7 +81,7 @@ const mapState = (state, props) => {
   let item = {};
   const id = props.match.params.id;
   if (id) {
-    item = state.config.items.find(i => i.id === id);
+    item = state.config.orderItems.find(i => i.id === id);
   }
   return {
     loading: state.async.loading,
