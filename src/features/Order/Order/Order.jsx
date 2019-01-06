@@ -24,11 +24,11 @@ class Order extends Component {
   handleWorkerChange = id => {
     this.setState({
       workerId: id
-    })
-  }
-  handleItemChange = name => {
-    console.log(name);
-    const rate = this.props.items.find(i => i.value === name).price;
+    });
+  };
+  handleTypeSelect = name => {
+    console.log(name)
+    const rate = this.props.applyRates[name];
     this.props.change("rate", rate);
   };
   handleOrderPlace = values => {
@@ -37,7 +37,11 @@ class Order extends Component {
 
     if (this.props.initialValues.id) {
       return this.props.updateOrder(
-        { ...values, id: this.props.match.params.id, workerId: this.state.workerId },
+        {
+          ...values,
+          id: this.props.match.params.id,
+          workerId: this.state.workerId
+        },
         this.props.history
       );
     }
@@ -113,15 +117,22 @@ class Order extends Component {
                   />
                 )}
                 <Field
+                  disabled={true}
                   name="item"
                   type="text"
                   label="Item Name"
-                  options={this.props.items}
-                  getSelectedValue={name => this.handleItemChange(name)}
-                  component={DropDown}
+                  component={TextInput}
                 />
               </Grid.Column>
               <Grid.Column>
+                <Field
+                  name="type"
+                  type="text"
+                  label="Item Type"
+                  options={this.props.rates}
+                  getSelectedValue={this.handleTypeSelect}
+                  component={DropDown}
+                />
                 <Field
                   disabled={true}
                   name="rate"
@@ -181,6 +192,13 @@ const mapState = (state, props) => {
     order = state.orders.orders.find(c => c.id === id);
   }
   return {
+    applyRates: state.config.rates,
+    rates: Object.keys(state.config.rates).map(type => ({
+      id: type,
+      label: type,
+      value: type,
+      rate: state.config.rates[type]
+    })),
     rate: formValueSelector("orderForm")(state, "rate"),
     loading: state.async.loading,
     initialValues: order === undefined ? {} : order,

@@ -39,6 +39,9 @@ import {
 } from "../../features/Settings/settingActions";
 import { fetchSellings } from "../../features/Sellings/sellingActions";
 class App extends Component {
+  handelBack = () => {
+    this.props.history.goBack()
+  }
   componentDidMount() {
     this.props.fetchCustomers();
     this.props.fetchWorkers();
@@ -46,7 +49,7 @@ class App extends Component {
     this.props.fetchOrderItems();
     this.props.fetchSellingItems();
     this.props.fetchSellings();
-    this.props.fetchRates()
+    this.props.fetchRates();
   }
   render() {
     return (
@@ -65,6 +68,12 @@ class App extends Component {
                     <SideBar />
                   </Grid.Column>
                   <Grid.Column span={3} style={{ padding: "0 4rem" }}>
+                    <span
+                      style={{ fontSize: "3.5rem", cursor: "pointer" }}
+                      onClick={this.handelBack}
+                    >
+                      &#8592;
+                    </span>
                     <Switch>
                       <Route path="/customers" component={Customers} />
                       <Route
