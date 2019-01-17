@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 import { auth } from "../../app/config/firebaseConfig";
 import Grid from "../../app/components/Grid/Grid";

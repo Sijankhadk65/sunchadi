@@ -14,6 +14,7 @@ import { H1 } from "../../../../../app/components/Heading/Heading";
 class AddSellingItem extends Component {
   handleItemAdd = values => {
     values.price = +values.price;
+    values.code = +values.code
     if (this.props.initialValues.id) {
       return this.props.updateSellingItem(
         {

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import TextInput from "../../../../app/components/Form/TextInput/TextInput";
 import Button from "../../../../app/components/Button/Button";

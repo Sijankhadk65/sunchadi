@@ -3,9 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Div from "../../app/common/Div/Div";
-import { appName } from "../config/appConfig";
 
-import { H1 } from "../../app/components/Heading/Heading";
 import Grid from "../../app/components/Grid/Grid";
 import SideBar from "../../features/SideBar/SideBar";
 import Login from "../../features/Login/Login";

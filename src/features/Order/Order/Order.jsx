@@ -117,7 +117,6 @@ class Order extends Component {
                   />
                 )}
                 <Field
-                  disabled={true}
                   name="item"
                   type="text"
                   label="Item Name"
